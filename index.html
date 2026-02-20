@@ -3,40 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <title>GBA Emulator</title>
-  <style> 
-    body {
-      background: #111;
-      color: #eee;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 0;
-      padding: 20px;
-    }
-    #game {
-      width: 640px;
-      height: 480px;
-      margin: 20px auto;
-      background: #000;
-      border: 2px solid #444;
-    }
+  <script src="https://cdn.emulatorjs.org/loader.js"></script>
+  <style>
+    body { background: #111; color: white; text-align: center; }
+    #game { width: 80%; height: 80vh; margin: auto; }
   </style>
 </head>
 <body>
 
-  <h1>GBA Emulator (Upload Your Own ROM)</h1>
-  <p>Use the EmulatorJS menu to load your ROM file.</p>
+<h1>GBA Emulator</h1>
+<div id="game"></div>
 
-  <div id="game"></div>
-
-  <script>
-    EJS_player = "#game";
-    EJS_core = "gba";
-    EJS_gameUrl = ""; // user uploads their own ROM
-    EJS_pathtodata = "data/";
-  </script>
-
-  <script src="https://www.emulatorjs.com/loader.js"></script>
+<script>
+  EJS_player = "#game";
+  EJS_core = "gba";
+  EJS_gameUrl = ""; // empty = user uploads ROM
+</script>
 
 </body>
 </html>
-
