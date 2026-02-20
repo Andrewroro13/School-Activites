@@ -2,22 +2,64 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>GBA Emulator</title>
-  <script src="https://cdn.jsdelivr.net/npm/emulatorjs@latest/dist/loader.js"></script>
+  <title>WASM‑Boy GBA Emulator</title>
+  <script src="https://unpkg.com/wasmboy/dist/wasmboy.js"></script>
   <style>
-    body { background: #111; color: white; text-align: center; }
-    #game { width: 80%; height: 80vh; margin: auto; }
+    body {
+      background: #0d0d0d;
+      color: white;
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+    #screen {
+      width: 480px;
+      height: 320px;
+      margin: 20px auto;
+      border: 4px solid #6a00ff;
+      border-radius: 12px;
+      background: black;
+    }
+    #upload {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #6a00ff;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #upload:hover {
+      background: #8a2eff;
+    }
   </style>
 </head>
 <body>
 
-<h1>GBA Emulator</h1>
-<div id="game"></div>
+<h1>WASM‑Boy GBA Emulator</h1>
+<canvas id="screen"></canvas>
+
+<input type="file" id="upload" accept=".gba,.bin" />
 
 <script>
-  EJS_player = "#game";
-  EJS_core = "gba";
-  EJS_gameUrl = ""; // user uploads ROM
+  const canvas = document.getElementById("screen");
+  const upload = document.getElementById("upload");
+
+  upload.addEventListener("change", async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const arrayBuffer = await file.arrayBuffer();
+
+    const wasmBoy = new WasmBoy(canvas, {
+      isGbcEnabled: true,
+      isGbaEnabled: true,
+      audioBatchProcessing: true
+    });
+
+    await wasmBoy.loadROM(arrayBuffer);
+    await wasmBoy.play();
+  });
 </script>
 
 </body>
