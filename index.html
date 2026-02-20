@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>WASM‑Boy GBA Emulator</title>
-  <script src="https://unpkg.com/wasmboy/dist/wasmboy.js"></script>
+  <script src="https://unpkg.com/wasmboy@0.7.1/dist/core/getWasmBoyWasmCore.iife.js"></script>
   <style>
     body {
       background: #0d0d0d;
@@ -51,7 +51,8 @@
 
     const arrayBuffer = await file.arrayBuffer();
 
-    const wasmBoy = new WasmBoy(canvas, {
+    const wasmBoy = await getWasmBoy({
+      canvas: canvas,
       isGbcEnabled: true,
       isGbaEnabled: true,
       audioBatchProcessing: true
